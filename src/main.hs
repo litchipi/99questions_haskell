@@ -36,7 +36,15 @@ tests_solution_2 = [
 	]
 solution_2 = last . init
 
+-- Question 3
+tests_solution_3 = [
+	(solution_3 [1, 2, 3] 2) == 2,
+	(solution_3 "haskell" 5) == 'e'
+	]
+solution_3 = \l x -> (l !! (x-1))
+
 all_tests = [
 	tests_solution_1,
-	tests_solution_2
+	tests_solution_2,
+	tests_solution_3
 	]
