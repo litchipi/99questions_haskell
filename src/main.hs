@@ -29,6 +29,14 @@ tests_solution_1 = [
 	]
 solution_1 = last
 
+-- Question 2
+tests_solution_2 = [
+	(solution_2 [1, 2, 3, 4]) == 3,
+	(solution_2 ['a' .. 'z']) == 'y'
+	]
+solution_2 = last . init
+
 all_tests = [
-	tests_solution_1
+	tests_solution_1,
+	tests_solution_2
 	]
