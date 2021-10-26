@@ -22,5 +22,13 @@ validate_solution :: Int -> Maybe Bool
 validate_solution nb | nb >= (length all_tests) = Nothing
 validate_solution nb = Just $ all (== True) $ (all_tests !! nb)
 
+-- Question 1
+tests_solution_1 = [
+	(solution_1 [1, 2, 3, 4]) == 4,
+	(solution_1 ['x', 'y', 'z']) == 'z'
+	]
+solution_1 = last
+
 all_tests = [
+	tests_solution_1
 	]
