@@ -43,8 +43,16 @@ tests_solution_3 = [
 	]
 solution_3 = \l x -> (l !! (x-1))
 
+-- Question 4
+tests_solution_4 = [
+	(solution_4 [123, 456, 789]) == 3,
+	(solution_4 "Hello, world!") == 13
+	]
+solution_4 = length
+
 all_tests = [
 	tests_solution_1,
 	tests_solution_2,
-	tests_solution_3
+	tests_solution_3,
+	tests_solution_4
 	]
