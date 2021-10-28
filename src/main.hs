@@ -222,6 +222,15 @@ solution_19 xs n = take (length xs) $ drop (length xs + n) $ cycle xs
 -- solution_19 l nb | nb < 0 = solution_19 l ((length l) + nb)
 -- solution_19 l nb = (drop nb l) ++ (take nb l)
 
+-- Question 20
+tests_solution_20 = [
+	(solution_20 2 "abcd") == ('b', "acd"),
+	(solution_20 5 "ablakzerjlcd") == ('k', "ablazerjlcd")
+	]
+
+solution_20 :: Int -> [a] -> (a, [a])
+solution_20 k l = (l !! (k-1), (take (k-1) l) ++ (drop k l))
+
 all_tests = [
 	tests_solution_1,
 	tests_solution_2,
@@ -241,5 +250,6 @@ all_tests = [
 	tests_solution_16,
 	tests_solution_17,
 	tests_solution_18,
-	tests_solution_19
+	tests_solution_19,
+	tests_solution_20
 	]
