@@ -231,6 +231,16 @@ tests_solution_20 = [
 solution_20 :: Int -> [a] -> (a, [a])
 solution_20 k l = (l !! (k-1), (take (k-1) l) ++ (drop k l))
 
+-- Question 21
+tests_solution_21 = [
+	(solution_21 'X' "abcd" 2) == "aXbcd"
+	]
+
+solution_21 :: a -> [a] -> Int -> [a]
+solution_21 char str 0 = undefined
+solution_21 char str 1 = [char] ++ str
+solution_21 char str ind = take (ind-1) str ++ [char] ++ drop (ind-1) str
+
 all_tests = [
 	tests_solution_1,
 	tests_solution_2,
@@ -251,5 +261,6 @@ all_tests = [
 	tests_solution_17,
 	tests_solution_18,
 	tests_solution_19,
-	tests_solution_20
+	tests_solution_20,
+	tests_solution_21
 	]
