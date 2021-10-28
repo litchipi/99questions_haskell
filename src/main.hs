@@ -137,6 +137,24 @@ solution_12 [Single x] = [x]
 solution_12 [Multiple n x] = take n (repeat x)
 solution_12 (x:xs) = (solution_12 [x]) ++ (solution_12 xs)
 
+-- Question 13
+tests_solution_13 = [
+	(solution_13 "aaaabccaadeeee") == [Multiple 4 'a', Single 'b', Multiple 2 'c', Multiple 2 'a', Single 'd', Multiple 4 'e']
+	]
+
+solution_13 :: Show a => Eq a => [a] -> [LengthEncoded a]
+solution_13 l = encode $ foldr helper [] l
+	where
+		helper x [] = [(1, x)]
+		helper x (y@(nb, yx):ys) = if yx == x
+								then [(nb + 1, yx)] ++ ys
+								else [(1, x), (nb, yx)] ++ ys
+		encode [] = []
+		encode [(nb, x)] = if nb == 1
+						then [Single x]
+						else [Multiple nb x]
+		encode (x:xs) = encode [x] ++ encode xs
+
 all_tests = [
 	tests_solution_1,
 	tests_solution_2,
@@ -149,5 +167,6 @@ all_tests = [
 	tests_solution_9,
 	tests_solution_10,
 	tests_solution_11,
-	tests_solution_12
+	tests_solution_12,
+	tests_solution_13
 	]
