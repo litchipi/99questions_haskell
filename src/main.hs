@@ -57,10 +57,20 @@ tests_solution_5 = [
 	]
 solution_5 = reverse
 
+-- Question 6
+tests_solution_6 = [
+	(solution_6 [1, 2, 3]) == False,
+	(solution_6 "madamimadam") == True,
+	(solution_6 [1, 2, 4, 8, 16, 8, 4, 2, 1]) == True
+	]
+solution_6 :: Eq a => [a] -> Bool
+solution_6 l = (l == reverse l)
+
 all_tests = [
 	tests_solution_1,
 	tests_solution_2,
 	tests_solution_3,
 	tests_solution_4,
-	tests_solution_5
+	tests_solution_5,
+	tests_solution_6
 	]
