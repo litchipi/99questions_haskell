@@ -125,6 +125,18 @@ solution_11 (x:xs) = let (fst, snd) = span (== x) xs in [encode fst] ++ (solutio
 		encode [x] = Multiple 2 x
 		encode (x:xs) = Multiple ((length xs)+2) x
 
+-- Question 12
+tests_solution_12 = [
+	(solution_12 [Multiple 4 'a',Single 'b',Multiple 2 'c', Multiple 2 'a',Single 'd',Multiple 4 'e']) == "aaaabccaadeeee",
+	(solution_12 [Multiple 2 'a',Multiple 3 'b',Single 'c',Single 'd', Multiple 5 'a']) == "aabbbcdaaaaa"
+	]
+
+solution_12 :: [LengthEncoded a] -> [a]
+solution_12 [] = []
+solution_12 [Single x] = [x]
+solution_12 [Multiple n x] = take n (repeat x)
+solution_12 (x:xs) = (solution_12 [x]) ++ (solution_12 xs)
+
 all_tests = [
 	tests_solution_1,
 	tests_solution_2,
@@ -136,5 +148,6 @@ all_tests = [
 	tests_solution_8,
 	tests_solution_9,
 	tests_solution_10,
-	tests_solution_11
+	tests_solution_11,
+	tests_solution_12
 	]
