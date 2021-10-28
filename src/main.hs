@@ -89,6 +89,16 @@ solution_8 :: Eq a => [a] -> [a]
 solution_8 [] = []
 solution_8 (x:xs) = let (head, tail) = span (== x) xs in [x] ++ (solution_8 tail)
 
+-- Question 9
+tests_solution_9 = [
+	(solution_9 ['a', 'a', 'a', 'a', 'b', 'c', 'c', 'a', 'a', 'd', 'e', 'e', 'e', 'e']) == ["aaaa","b","cc","aa","d","eeee"]
+	]
+
+solution_9 :: Show a => Eq a => [a] -> [[a]]
+solution_9 [] = []
+solution_9 [x] = [[x]]
+solution_9 (x:xs) = let (fst, snd) = span (== x) xs in [[x] ++ fst] ++ (solution_9 snd)
+
 all_tests = [
 	tests_solution_1,
 	tests_solution_2,
@@ -97,5 +107,6 @@ all_tests = [
 	tests_solution_5,
 	tests_solution_6,
 	tests_solution_7,
-	tests_solution_8
+	tests_solution_8,
+	tests_solution_9
 	]
