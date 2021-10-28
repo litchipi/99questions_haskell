@@ -66,11 +66,29 @@ tests_solution_6 = [
 solution_6 :: Eq a => [a] -> Bool
 solution_6 l = (l == reverse l)
 
+-- Question 7
+data NestedList a = Elem a | List [NestedList a] deriving (Show)
+tests_solution_7 = [
+	(solution_7 (Elem 5)) == [5],
+	(solution_7 (List [Elem 1, List [Elem 2, List [Elem 3, Elem 4], Elem 5]])) == [1, 2, 3, 4, 5],
+	(solution_7 (List [])) == []
+	]
+
+solution_7 = \x -> __solution_7 x [] []
+
+__solution_7 :: Show a => Eq a => NestedList a -> [NestedList a] -> [a] -> [a]
+__solution_7 (List []) [] l = l
+__solution_7 (Elem x) [] l = l ++ [x]
+__solution_7 (Elem x) (n:ns) l = __solution_7 n ns (l ++ [x])
+__solution_7 (List (x:xs)) next l = __solution_7 x (xs ++ next) l
+__solution_7 el next l = undefined
+
 all_tests = [
 	tests_solution_1,
 	tests_solution_2,
 	tests_solution_3,
 	tests_solution_4,
 	tests_solution_5,
-	tests_solution_6
+	tests_solution_6,
+	tests_solution_7
 	]
