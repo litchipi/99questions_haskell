@@ -50,9 +50,17 @@ tests_solution_4 = [
 	]
 solution_4 = length
 
+-- Question 5
+tests_solution_5 = [
+	(solution_5 "A man, a plan, a canal, panama!") == "!amanap ,lanac a ,nalp a ,nam A",
+	(solution_5 [1, 2, 3, 4]) == [4, 3, 2, 1]
+	]
+solution_5 = reverse
+
 all_tests = [
 	tests_solution_1,
 	tests_solution_2,
 	tests_solution_3,
-	tests_solution_4
+	tests_solution_4,
+	tests_solution_5
 	]
