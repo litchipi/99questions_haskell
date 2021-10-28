@@ -71,17 +71,13 @@ data NestedList a = Elem a | List [NestedList a] deriving (Show)
 tests_solution_7 = [
 	(solution_7 (Elem 5)) == [5],
 	(solution_7 (List [Elem 1, List [Elem 2, List [Elem 3, Elem 4], Elem 5]])) == [1, 2, 3, 4, 5],
-	(solution_7 (List [])) == []
+	(solution_7 (List [])) == ([] :: [Int])
 	]
 
-solution_7 = \x -> __solution_7 x [] []
-
-__solution_7 :: Show a => Eq a => NestedList a -> [NestedList a] -> [a] -> [a]
-__solution_7 (List []) [] l = l
-__solution_7 (Elem x) [] l = l ++ [x]
-__solution_7 (Elem x) (n:ns) l = __solution_7 n ns (l ++ [x])
-__solution_7 (List (x:xs)) next l = __solution_7 x (xs ++ next) l
-__solution_7 el next l = undefined
+solution_7 :: Eq a => NestedList a -> [a]
+solution_7 (Elem x) = [x]
+solution_7 (List (x:xs)) = (solution_7 x) ++ (solution_7 (List xs))
+solution_7 (List []) = []
 
 all_tests = [
 	tests_solution_1,
