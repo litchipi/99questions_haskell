@@ -177,6 +177,20 @@ solution_15 l 0 = []
 solution_15 l 1 = l
 solution_15 (x:xs) nb = (take nb (repeat x)) ++ solution_15 xs nb
 
+-- Question 16
+tests_solution_16 = [
+	(solution_16 "abcdefghik" 3) == "abdeghk"
+	]
+
+solution_16 :: Show a => [a] -> Int -> [a]
+solution_16 _ 0 = undefined
+solution_16 _ 1 = []
+solution_16 l n = let (res, _) = foldl (dropevery n) ([], 0) l in res
+	where
+		dropevery n (res, count) x = if (count + 1) >= n
+							  then (res, 0)
+							  else (res ++ [x], count + 1)
+
 all_tests = [
 	tests_solution_1,
 	tests_solution_2,
@@ -192,5 +206,6 @@ all_tests = [
 	tests_solution_12,
 	tests_solution_13,
 	tests_solution_14,
-	tests_solution_15
+	tests_solution_15,
+	tests_solution_16
 	]
