@@ -155,6 +155,15 @@ solution_13 l = encode $ foldr helper [] l
 						else [Multiple nb x]
 		encode (x:xs) = encode [x] ++ encode xs
 
+-- Question 14
+tests_solution_14 = [
+	(solution_14 [1, 2, 3]) == [1,1,2,2,3,3]
+	]
+
+solution_14 :: [a] -> [a]
+solution_14 [] = []
+solution_14 (x:xs) = [x, x] ++ solution_14 xs
+
 all_tests = [
 	tests_solution_1,
 	tests_solution_2,
@@ -168,5 +177,6 @@ all_tests = [
 	tests_solution_10,
 	tests_solution_11,
 	tests_solution_12,
-	tests_solution_13
+	tests_solution_13,
+	tests_solution_14
 	]
