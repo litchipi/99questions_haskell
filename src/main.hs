@@ -99,6 +99,16 @@ solution_9 [] = []
 solution_9 [x] = [[x]]
 solution_9 (x:xs) = let (fst, snd) = span (== x) xs in [[x] ++ fst] ++ (solution_9 snd)
 
+-- Question  10
+tests_solution_10 = [
+	(solution_10 "aaaabccaadeeee") == [(4,'a'),(1,'b'),(2,'c'),(2,'a'),(1,'d'),(4,'e')]
+	]
+
+solution_10 :: Show a => Eq a => [a] -> [(Int, a)]
+solution_10 [] = []
+solution_10 [x] = [(1, x)]
+solution_10 (x:xs) = let (fst, snd) = span (== x) xs in [((length fst)+1, x)] ++ (solution_10 snd)
+
 all_tests = [
 	tests_solution_1,
 	tests_solution_2,
@@ -108,5 +118,6 @@ all_tests = [
 	tests_solution_6,
 	tests_solution_7,
 	tests_solution_8,
-	tests_solution_9
+	tests_solution_9,
+	tests_solution_10
 	]
