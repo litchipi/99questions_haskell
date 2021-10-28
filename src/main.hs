@@ -109,6 +109,22 @@ solution_10 [] = []
 solution_10 [x] = [(1, x)]
 solution_10 (x:xs) = let (fst, snd) = span (== x) xs in [((length fst)+1, x)] ++ (solution_10 snd)
 
+-- Question 11
+
+data LengthEncoded a = Single a | Multiple Int a deriving(Eq)
+tests_solution_11 = [
+	(solution_11 "aaaabccaadeeee") == [Multiple 4 'a', Single 'b', Multiple 2 'c', Multiple 2 'a', Single 'd', Multiple 4 'e']
+	]
+
+solution_11 :: Eq a => [a] -> [LengthEncoded a]
+solution_11 [] = []
+solution_11 [x] = [Single x]
+solution_11 (x:xs) = let (fst, snd) = span (== x) xs in [encode fst] ++ (solution_11 snd)
+	where
+		encode [] = Single x
+		encode [x] = Multiple 2 x
+		encode (x:xs) = Multiple ((length xs)+2) x
+
 all_tests = [
 	tests_solution_1,
 	tests_solution_2,
@@ -119,5 +135,6 @@ all_tests = [
 	tests_solution_7,
 	tests_solution_8,
 	tests_solution_9,
-	tests_solution_10
+	tests_solution_10,
+	tests_solution_11
 	]
