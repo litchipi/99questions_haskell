@@ -200,6 +200,14 @@ solution_17 :: [a] -> Int -> ([a], [a])
 solution_17 l 0 = (l, [])
 solution_17 l nb = (take nb l, drop nb l)
 
+-- Question 18
+tests_solution_18 = [
+	(solution_18 ['a','b','c','d','e','f','g','h','i','k'] 3 7) == "cdefg"
+	]
+
+solution_18 :: [a] -> Int -> Int -> [a]
+solution_18 l indstart end = let start = indstart - 1 in take (end - start) (drop start l)
+
 all_tests = [
 	tests_solution_1,
 	tests_solution_2,
@@ -217,5 +225,6 @@ all_tests = [
 	tests_solution_14,
 	tests_solution_15,
 	tests_solution_16,
-	tests_solution_17
+	tests_solution_17,
+	tests_solution_18
 	]
