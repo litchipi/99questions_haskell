@@ -241,6 +241,15 @@ solution_21 char str 0 = undefined
 solution_21 char str 1 = [char] ++ str
 solution_21 char str ind = take (ind-1) str ++ [char] ++ drop (ind-1) str
 
+-- Question 22
+tests_solution_22 = [
+	(solution_22 4 9) == [4, 5, 6, 7, 8, 9],
+	(solution_22 2 4) == [2, 3, 4]
+	]
+
+solution_22 :: Int -> Int -> [Int]
+solution_22 a b = [a..b]
+
 all_tests = [
 	tests_solution_1,
 	tests_solution_2,
@@ -262,5 +271,6 @@ all_tests = [
 	tests_solution_18,
 	tests_solution_19,
 	tests_solution_20,
-	tests_solution_21
+	tests_solution_21,
+	tests_solution_22
 	]
