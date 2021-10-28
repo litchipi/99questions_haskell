@@ -164,6 +164,19 @@ solution_14 :: [a] -> [a]
 solution_14 [] = []
 solution_14 (x:xs) = [x, x] ++ solution_14 xs
 
+-- Question 15
+tests_solution_15 = [
+	(solution_15 "abc" 3) == "aaabbbccc",
+	(solution_15 "abc" 1) == "abc",
+	(solution_15 "abc" 0) == ""
+	]
+
+solution_15 :: [a] -> Int -> [a]
+solution_15 [] _ = []
+solution_15 l 0 = []
+solution_15 l 1 = l
+solution_15 (x:xs) nb = (take nb (repeat x)) ++ solution_15 xs nb
+
 all_tests = [
 	tests_solution_1,
 	tests_solution_2,
@@ -178,5 +191,6 @@ all_tests = [
 	tests_solution_11,
 	tests_solution_12,
 	tests_solution_13,
-	tests_solution_14
+	tests_solution_14,
+	tests_solution_15
 	]
