@@ -191,6 +191,15 @@ solution_16 l n = let (res, _) = foldl (dropevery n) ([], 0) l in res
 							  then (res, 0)
 							  else (res ++ [x], count + 1)
 
+-- Question 17
+tests_solution_17 = [
+	(solution_17 "abcdefghik" 3) == ("abc", "defghik")
+	]
+
+solution_17 :: [a] -> Int -> ([a], [a])
+solution_17 l 0 = (l, [])
+solution_17 l nb = (take nb l, drop nb l)
+
 all_tests = [
 	tests_solution_1,
 	tests_solution_2,
@@ -207,5 +216,6 @@ all_tests = [
 	tests_solution_13,
 	tests_solution_14,
 	tests_solution_15,
-	tests_solution_16
+	tests_solution_16,
+	tests_solution_17
 	]
