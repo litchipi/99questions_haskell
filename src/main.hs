@@ -79,6 +79,16 @@ solution_7 (Elem x) = [x]
 solution_7 (List (x:xs)) = (solution_7 x) ++ (solution_7 (List xs))
 solution_7 (List []) = []
 
+-- Question 8
+tests_solution_8 = [
+	(solution_8 "aaaabccaadeeee") == "abcade",
+	(solution_8 "taaaaatoooorgee") == "tatorge"
+	]
+
+solution_8 :: Eq a => [a] -> [a]
+solution_8 [] = []
+solution_8 (x:xs) = let (head, tail) = span (== x) xs in [x] ++ (solution_8 tail)
+
 all_tests = [
 	tests_solution_1,
 	tests_solution_2,
@@ -86,5 +96,6 @@ all_tests = [
 	tests_solution_4,
 	tests_solution_5,
 	tests_solution_6,
-	tests_solution_7
+	tests_solution_7,
+	tests_solution_8
 	]
