@@ -208,6 +208,20 @@ tests_solution_18 = [
 solution_18 :: [a] -> Int -> Int -> [a]
 solution_18 l indstart end = let start = indstart - 1 in take (end - start) (drop start l)
 
+-- Question 19
+tests_solution_19 = [
+	(solution_19 ['a','b','c','d','e','f','g','h'] 3) == "defghabc",
+	(solution_19 ['a','b','c','d','e','f','g','h'] (-2)) == "ghabcdef"
+	]
+
+-- Very VERY elegant solution
+solution_19 xs n = take (length xs) $ drop (length xs + n) $ cycle xs
+-- My solution:
+-- solution_19 :: [a] -> Int -> [a]
+-- solution_19 l 0 = l
+-- solution_19 l nb | nb < 0 = solution_19 l ((length l) + nb)
+-- solution_19 l nb = (drop nb l) ++ (take nb l)
+
 all_tests = [
 	tests_solution_1,
 	tests_solution_2,
@@ -226,5 +240,6 @@ all_tests = [
 	tests_solution_15,
 	tests_solution_16,
 	tests_solution_17,
-	tests_solution_18
+	tests_solution_18,
+	tests_solution_19
 	]
