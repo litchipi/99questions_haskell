@@ -197,8 +197,7 @@ tests_solution_17 = [
 	]
 
 solution_17 :: [a] -> Int -> ([a], [a])
-solution_17 l 0 = (l, [])
-solution_17 l nb = (take nb l, drop nb l)
+solution_17 l nb = splitAt nb l
 
 -- Question 18
 tests_solution_18 = [
@@ -229,7 +228,7 @@ tests_solution_20 = [
 	]
 
 solution_20 :: Int -> [a] -> (a, [a])
-solution_20 k l = (l !! (k-1), (take (k-1) l) ++ (drop k l))
+solution_20 k l = let (fst, snd) = splitAt (k-1) l in (l !! (k-1), fst ++ (tail snd))
 
 -- Question 21
 tests_solution_21 = [
@@ -239,7 +238,7 @@ tests_solution_21 = [
 solution_21 :: a -> [a] -> Int -> [a]
 solution_21 char str 0 = undefined
 solution_21 char str 1 = [char] ++ str
-solution_21 char str ind = take (ind-1) str ++ [char] ++ drop (ind-1) str
+solution_21 char str ind = let (fst, snd) = splitAt (ind-1) str in fst ++ [char] ++ snd
 
 -- Question 22
 tests_solution_22 = [
