@@ -29,5 +29,5 @@ haskell_toolchain_library(name = "base")
 haskell_binary(
     name = "99questions",
     srcs = glob(["src/*.hs"]),
-    deps = [":base"],
+    deps = [":base", "@stackage//:random"],
 )

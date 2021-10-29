@@ -35,7 +35,7 @@ load(
 
 stack_snapshot(
     name = "stackage",
-    packages = [],
+    packages = ["random"],
     # Last snapshot published for ghc-8.6.5 the default version picked up by
     # rules_haskell
     snapshot = "lts-14.27",
