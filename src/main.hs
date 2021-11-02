@@ -287,6 +287,20 @@ solution_24 :: Random.RandomGen g => Int -> Int -> (g -> [Int])
 solution_24 nb max | nb > max = error "Have to pick unique numbers, pick less or increase diversity"
 solution_24 nb max = take nb . List.nub . Random.randomRs (1, max)
 
+-- Question 25
+testlist25 = "abcdefghijklmnop"
+solution_25_sample = solution_25 testlist25 $ Random.mkStdGen 65423434
+tests_solution_25 = [
+	(length solution_25_sample) == (length testlist25),
+	foldr (\el acc -> acc && (el `elem` testlist25)) True solution_25_sample,
+	solution_25_sample /= testlist25
+	]
+
+solution_25 :: [a] -> (Random.StdGen -> [a])
+solution_25 xs = solution_23_modified
+	where
+		solution_23_modified gen = let (res, _) = solution_23 xs (length xs) gen in res
+
 all_tests = [
 	tests_solution_1,
 	tests_solution_2,
@@ -311,5 +325,6 @@ all_tests = [
 	tests_solution_21,
 	tests_solution_22,
 	tests_solution_23,
-	tests_solution_24
+	tests_solution_24,
+	tests_solution_25
 	]
