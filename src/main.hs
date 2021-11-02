@@ -2,6 +2,7 @@
 import qualified System.Random as Random
 import qualified Data.Maybe as Maybe
 import qualified Debug.Trace as Debug
+import qualified Data.List as List
 
 main :: IO ()
 main = putStrLn $ perform_question 0
@@ -273,6 +274,19 @@ solution_23 subset nb gen = let (rest, lastgen) = solution_23 new_subset (nb-1) 
 		(rand_ind, newgen) = Random.randomR (0, (length subset)-1) gen
 		(picked, new_subset) = pop_el rand_ind subset
 
+-- Question 24
+solution_24_sample = solution_24 150 155 $ Random.mkStdGen 3242342342
+solution_24_sample_2 = solution_24 150 155 $ Random.mkStdGen 423445436
+tests_solution_24 = [
+	(length solution_24_sample) == 150,
+	(maximum solution_24_sample_2) <= 155,
+	solution_24_sample /= solution_24_sample_2
+	]
+
+solution_24 :: Random.RandomGen g => Int -> Int -> (g -> [Int])
+solution_24 nb max | nb > max = error "Have to pick unique numbers, pick less or increase diversity"
+solution_24 nb max = take nb . List.nub . Random.randomRs (1, max)
+
 all_tests = [
 	tests_solution_1,
 	tests_solution_2,
@@ -296,5 +310,6 @@ all_tests = [
 	tests_solution_20,
 	tests_solution_21,
 	tests_solution_22,
-	tests_solution_23
+	tests_solution_23,
+	tests_solution_24
 	]
