@@ -301,6 +301,45 @@ solution_25 xs = solution_23_modified
 	where
 		solution_23_modified gen = let (res, _) = solution_23 xs (length xs) gen in res
 
+-- Question 26
+test_solution_26 :: Eq a => [[a]] -> [[a]] -> Bool
+test_solution_26 exp got = lengthOK && elemsOK
+	where
+		lengthOK = (length got) == (length exp)
+		elemsOK = foldr (\el acc -> acc && (el `elem` exp)) True $ got
+
+allcombinations_1 = ["abc", "abd", "acd", "bcd"]
+allcombinations_2 = [
+		"ABCDE", "ABCDF", "ABCDG", "ABCDH", "ABCEF", "ABCEG", "ABCEH", "ABCFG", "ABCFH", "ABCGH", "ABDEF", "ABDEG",
+		"ABDEH", "ABDFG", "ABDFH", "ABDGH", "ABEFG", "ABEFH", "ABEGH", "ABFGH", "ACDEF", "ACDEG", "ACDEH", "ACDFG",
+		"ACDFH", "ACDGH", "ACEFG", "ACEFH", "ACEGH", "ACFGH", "ADEFG", "ADEFH", "ADEGH", "ADFGH", "AEFGH", "BCDEF",
+		"BCDEG", "BCDEH", "BCDFG", "BCDFH", "BCDGH", "BCEFG", "BCEFH", "BCEGH", "BCFGH", "BDEFG", "BDEFH", "BDEGH",
+		"BDFGH", "BEFGH", "CDEFG", "CDEFH", "CDEGH", "CDFGH", "CEFGH", "DEFGH"]
+
+tests_solution_26 = [
+	test_solution_26 allcombinations_1 $ solution_26 3 "abcd" [],
+	test_solution_26 allcombinations_2 $ solution_26 5 "ABCDEFGH" []
+	]
+
+solution_26 :: Show a => Int -> [a] -> [[a]] -> [[a]]
+
+solution_26 1 _ [] = []
+solution_26 1 (x:[]) (p:px) = addel (p:px) x ++ (solution_26 1 [x] px)
+	where
+		addel :: [[a]] -> a -> [[a]]
+		addel (p:px) x = [p ++ [x]] ++ addel px x
+		addel [] x = []
+solution_26 1 (x:xs) (p:px) = (solution_26 1 [x] (p:px)) ++ (solution_26 1 xs (p:px))
+
+solution_26 n (x:xs) [] = solution_26 (n-1) xs [[x]] ++ (solution_26 n xs [])
+solution_26 n (x:xs) px = solution_26 (n-1) xs (addprefix px x) ++ (solution_26 n xs px)
+	where
+		addprefix :: Show a => [[a]] -> a -> [[a]]
+		addprefix [] el = []
+		addprefix (p:px) el = [p ++ [el]] ++ addprefix px el
+solution_26 n [] _ = []
+solution_26 _ _ _ = undefined
+
 all_tests = [
 	tests_solution_1,
 	tests_solution_2,
@@ -326,5 +365,6 @@ all_tests = [
 	tests_solution_22,
 	tests_solution_23,
 	tests_solution_24,
-	tests_solution_25
+	tests_solution_25,
+	tests_solution_26
 	]
